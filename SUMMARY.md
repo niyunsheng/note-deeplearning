@@ -5,6 +5,7 @@
 ## 环境配置
 
 * [cuda](huan-jing-pei-zhi/cuda.md)
+* [GPU高性能编程 CUDA实战](huan-jing-pei-zhi/cuda_by_example.md)
 * [anaconda](huan-jing-pei-zhi/anaconda.md)
 
 ## 基础知识
