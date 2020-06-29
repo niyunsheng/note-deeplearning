@@ -44,7 +44,7 @@ CUDA Toolkit由以下组件组成：
 
 ## CUDA toolkit 安装
 
-**注意**：如果使用conda，则conda自带cudatoolkit和cudnn，无序单独安装cudatoolkit和cudnn。
+**注意**：如果使用conda，则conda自带cudatoolkit和cudnn，无需单独安装cudatoolkit和cudnn。
 
 参考官方安装指南[cuda-installation-guide-linux](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html)
 
