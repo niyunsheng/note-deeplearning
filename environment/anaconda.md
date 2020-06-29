@@ -22,12 +22,10 @@ conda config --set show_channel_urls yes
 
 好处在于不用更新conda，这个环境出错的话，可以把这个环境全部删除了，而base环境无法删除
 
-
-
 ## 基本操作
 
-* 更新conda `conda update conda`
-* 更新所有第三方包 `conda update --all`
+环境相关操作
+
 * 查看conda信息`conda info`
 * 进入base环境`conda activate base`
 * 创建新环境 `conda create --name ML python=3.7`
@@ -36,14 +34,22 @@ conda config --set show_channel_urls yes
 * 激活新环境`conda activate ML`
 * 如果conda没有添加到PATH，则用`source anaconda3/bin/activate`来激活环境
 * 退出base环境`conda deactivate`
-* 查看包`conda list`
-* 安装包`conda instll numpy`
-* 卸载包`conda uninstall numpy`
-* 安装tensorflow`pip install tensorflow`
-* 安装keras`pip install keras`
-* pip升级包`pip install --upgrade numpy`
 * 删除环境`conda remove -n name --all`
 * 卸载anaconda：直接删除anaconda3文件夹即可。
+
+安装升级卸载查看包
+* 更新conda `conda update conda`
+* 更新所有第三方包 `conda update --all`
+* 查看包`conda list`
+* 安装包`conda instll numpy`
+* 安装时指明源用-c参数`conda install numpy -c https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/`
+* 卸载包`conda uninstall numpy`
+* 升级包`conda update numpy`
+
+pip安装升级卸载包
+* 安装包`pip install numpy`
+* 卸载包`pip uninstall numpy`
+* 升级包`pip install --upgrade numpy`
 
 ## 配置jupyter notebook和jupyter lab
 
