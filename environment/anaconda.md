@@ -30,6 +30,9 @@ custom_channels:
   simpleitk: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
 ```
 
+显示下载路径
+`conda config --set show_channel_urls yes`
+
 * 新建环境
 
 新建环境
@@ -116,4 +119,16 @@ Conda和pip服务于不同的目的，并且只在一小部分任务中直接竞
 index-url = https://pypi.tuna.tsinghua.edu.cn/simple
 ```
 
-## 
+## 安装pytorch
+
+
+### 驱动
+* 如果要用cuda，本机必须安装cuda驱动，在官网选择对应的操作系统和显卡型号下载安装即可。
+* 查看驱动版本`cat /proc/driver/nvidia/version`
+
+### toolkit
+
+conda环境提供了cudatoolkit和cudnn，无需在系统安装cudatoolkit。
+
+查看官网看最新的安装命令`conda install pytorch torchvision cudatoolkit=10.2 -c pytorch`
+> -c不能省略

@@ -19,7 +19,32 @@ cuda程序有两种代码，一种是运行在cpu上的host代码，一种是运
 
 * 安装完成后可以查看驱动版本`cat /proc/driver/nvidia/version`
 
-## 安装CUDA toolkit
+## CUDA toolkit
+
+CUDA Toolkit由以下组件组成：
+
+* Compiler: CUDA-C和CUDA-C++编译器NVCC位于bin/目录中。它建立在NVVM优化器之上，而NVVM优化器本身构建在LLVM编译器基础结构之上。因此开发人员可以使用nvm/目录下的Compiler SDK来直接针对NVVM进行开发。
+* Tools: 提供一些像profiler,debuggers等工具，这些工具可以从bin/目录中获取
+* Libraries: 下面列出的部分科学库和实用程序库可以在lib/目录中使用(Windows上的DLL位于bin/中)，它们的接口在include/目录中可获取。
+  * cudart: CUDA Runtime
+  * cudadevrt: CUDA device runtime
+  * cupti: CUDA profiling tools interface
+  * nvml: NVIDIA management library
+  * nvrtc: CUDA runtime compilation
+  * cublas: BLAS (Basic Linear Algebra Subprograms，基础线性代数程序集)
+  * cublas_device: BLAS kernel interface
+  * ...
+* CUDA Samples: 演示如何使用各种CUDA和library API的代码示例。可在Linux和Mac上的samples/目录中获得
+
+安装toolkit之前要安装Driver: 运行CUDA应用程序需要系统至少有一个具有CUDA功能的GPU和与CUDA工具包兼容的驱动程序。**每个版本的CUDA工具包都对应一个最低版本的CUDA Driver**，也就是说如果你安装的CUDA Driver版本比官方推荐的还低，那么很可能会无法正常运行。
+
+特别辨析：
+* nvcc：nvcc其实就是CUDA的编译器,可以从CUDA Toolkit的/bin目录中获取,类似于gcc就是c语言的编译器。
+* nvidia-smi：它是一个基于前面介绍过的NVIDIA Management Library(NVML)构建的命令行实用工具，旨在帮助管理和监控NVIDIA GPU设备。
+
+## CUDA toolkit 安装
+
+**注意**：如果使用conda，则conda自带cudatoolkit和cudnn，无序单独安装cudatoolkit和cudnn。
 
 参考官方安装指南[cuda-installation-guide-linux](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html)
 
