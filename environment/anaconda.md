@@ -130,6 +130,21 @@ index-url = https://pypi.tuna.tsinghua.edu.cn/simple
 
 conda环境提供了cudatoolkit和cudnn，无需在系统安装cudatoolkit。
 
+### 设置cuda可见性
+
+可以设置系统变量
+```
+export CUDA_DEVICE_ORDER="PCI_BUS_ID"
+export CUDA_VISIBLE_DEVICES="0,1,3"
+```
+
+或者在程序里面设置
+
+```python
+os.environ["CUDA_DEVICE_ORDER"]="PCI_BUS_ID"
+os.environ["CUDA_VISIBLE_DEVICES"]="0,2"
+```
+
 查看官网看最新的安装命令`conda install pytorch torchvision cudatoolkit=10.2 -c pytorch`
 > -c不能省略
 
