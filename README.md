@@ -13,3 +13,4 @@
 * [numpy](python-base/numpy.md)
 * [matplotlib](python-base/matplotlib.md)
 * [pandas](python-base/pandas.md)
+* [pytorch](python-base/pytorch.md)
