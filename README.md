@@ -14,3 +14,7 @@
 * [matplotlib](python-base/matplotlib.md)
 * [pandas](python-base/pandas.md)
 * [pytorch](python-base/pytorch.md)
+
+## 人脸验证和人脸识别
+
+* [2d人脸对齐](FaceVerification_FacerRcognition/warp_and_crop_face.md)
