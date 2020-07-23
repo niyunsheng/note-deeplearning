@@ -153,7 +153,7 @@ $$
 \left[\begin{matrix} x & y & 1 \end{matrix}\right] * \left[\begin{matrix}cos{\theta} & sin{\theta} & 0 \\ -sin{\theta} & cos{\theta} & 0 \\ 0 & 0 & 1\end{matrix}\right] = \left[\begin{matrix} x * cos{\theta} - y * sin{\theta} & x * sin{\theta} + y * cos{\theta} & 1 \end{matrix}\right]
 $$
 
-## 错切
+### 错切
 
 $$
 \left[\begin{matrix} x & y & 1 \end{matrix}\right] * \left[\begin{matrix}1 & a & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1\end{matrix}\right] = \left[\begin{matrix} x & a*x+y & 1 \end{matrix}\right]
@@ -169,7 +169,7 @@ $$
 \left[\begin{matrix} x & y & 1 \end{matrix}\right] * \left[\begin{matrix}1 & 0 & 0 \\ 0 & 1 & 0 \\ -t_x & -t_y & 1\end{matrix}\right] * \left[\begin{matrix}cos{\theta} & sin{\theta} & 0 \\ -sin{\theta} & cos{\theta} & 0 \\ 0 & 0 & 1\end{matrix}\right] * \left[\begin{matrix}1 & 0 & 0 \\ 0 & 1 & 0 \\ t_x & t_y & 1\end{matrix}\right]
 $$
 
-### opencv中的仿射变换
+## opencv中的仿射变换
 
 `crop_img = cv2.warpAffine(src_img, tfm, (crop_size[0], crop_size[1]))`
 
