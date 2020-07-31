@@ -18,3 +18,9 @@
 ## 人脸验证和人脸识别
 
 * [2d人脸对齐](FaceVerification_FacerRcognition/warp_and_crop_face.md)
+
+## 搜索系统
+
+* [开源搜索库faiss](search-system/faiss.md)
+* [faiss进阶](search-system/faiss_develop.md)
+* [Product Quantizer](search-system/product_quantizer.md)
