@@ -24,3 +24,7 @@
 * [开源搜索库faiss](search-system/faiss.md)
 * [faiss进阶](search-system/faiss_develop.md)
 * [Product Quantizer](search-system/product_quantizer.md)
+
+## 其他
+
+* [how to ask](how_to_ask.md)
