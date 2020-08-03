@@ -193,6 +193,12 @@ print(I[:5])                   # neighbors of the 5 first queries
 print(I[-5:])                  # neighbors of the 5 last queries
 ```
 
+## Typical use cases
+
+### Indexing-1M-vectors
+
+当数据集约为1m个向量时，穷举索引变得太慢，因此一个不错的选择是IndexIVFFlat。它仍然返回精确的距离，但由于不详尽，有时会错过邻居。
+
 ## Faiss Index 进阶
 
 重点：
