@@ -27,5 +27,5 @@
 
 ## 其他
 
-* [how to ask](how_to_ask.md)
-* [google python styleguide](zh-google-python-styleguide.md)
+* [how to ask](others/how_to_ask.md)
+* [google python styleguide](others/zh-google-python-styleguide.md)
