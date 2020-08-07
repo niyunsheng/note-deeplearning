@@ -13,11 +13,13 @@
 * [numpy](python-base/numpy.md)
 * [matplotlib](python-base/matplotlib.md)
 * [pandas](python-base/pandas.md)
-* [pytorch](python-base/pytorch.md)
+* [pytorch基础](python-base/pytorch-base.md)
+* [pytorch开发](python-base/pytorch-develop.md)
 
 ## 人脸验证和人脸识别
 
 * [2d人脸对齐](FaceVerification_FacerRcognition/warp_and_crop_face.md)
+* [face loss](FaceVerification_FacerRcognition/face_loss.md)
 
 ## 搜索系统
 

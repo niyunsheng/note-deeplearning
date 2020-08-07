@@ -119,6 +119,10 @@ Conda和pip服务于不同的目的，并且只在一小部分任务中直接竞
 index-url = https://pypi.tuna.tsinghua.edu.cn/simple
 ```
 
+如果遇到网络状态不好的情况，延长等待的时间可能会解决ReadTimeoutError的问题，命令如下：
+
+`pip install package --default-timeout=100`
+
 ## 安装pytorch
 
 
