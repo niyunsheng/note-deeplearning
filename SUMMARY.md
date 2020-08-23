@@ -16,6 +16,13 @@
 * [pytorch基础](python-base/pytorch-base.md)
 * [pytorch开发](python-base/pytorch-develop.md)
 
+## cv baseline
+
+* [cv baseline](cv_baseline/cv_baseline.md)
+* [AlexNet.py](cv_baseline/AlexNet.py)
+* [Vgg.py](cv_baseline/Vgg.py)
+* [GoogLeNet.py](cv_baseline/GoogLeNet.py)
+
 ## 人脸验证和人脸识别
 
 * [2d人脸对齐](FaceVerification_FacerRcognition/warp_and_crop_face.md)

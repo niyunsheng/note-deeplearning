@@ -80,3 +80,19 @@ $$
 `torch.nn.init.ones_(tensor: torch.Tensor) → torch.Tensor`
 
 `torch.nn.init.zeros_(tensor: torch.Tensor) → torch.Tensor`
+
+## nn
+
+### `nn.Conv2d`
+
+![](../images/conv_equation.svg)
+
+### `nn.MaxPool2d`和`nn.AvgPool2d`
+
+公式和conv2d相同
+
+### `nn.AdaptiveAvgPool2d`
+
+`torch.nn.AdaptiveAvgPool2d(output_size: Union[T, Tuple[T, ...]])`
+
+给出输出的大小，自适应算法能够自动帮助我们计算核的大小和每次移动的步长。
