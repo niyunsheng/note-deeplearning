@@ -22,6 +22,10 @@
 * [face loss](FaceVerification_FacerRcognition/face_loss.md)
 * [face dataset](FaceVerification_FacerRcognition/face-datasets.md)
 
+## 目标检测
+
+* [目标检测数据集](object-detection/datasets.md)
+
 ## 搜索系统
 
 * [开源搜索库faiss](search-system/faiss.md)
