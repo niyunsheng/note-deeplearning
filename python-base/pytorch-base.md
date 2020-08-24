@@ -9,6 +9,27 @@
 * `asin()`
 * `asin_()`
 
+### gather
+
+`torch.gather(input, dim, index, out=None, sparse_grad=False) → Tensor`
+
+按给定的轴，根据index在input上收集数据。
+
+index的维度和给定的tensor相同。
+
+```
+示例1：对于一个三维张量，有
+out[i][j][k] = input[index[i][j][k]][j][k]  # if dim == 0
+out[i][j][k] = input[i][index[i][j][k]][k]  # if dim == 1
+out[i][j][k] = input[i][j][index[i][j][k]]  # if dim == 2
+
+示例2：
+>>> t = torch.tensor([[1,2],[3,4]])
+>>> torch.gather(t, 1, torch.tensor([[0,0],[1,0]]))
+tensor([[ 1,  1],
+        [ 4,  3]])
+```
+
 ## nn.functional
 
 ### normalize
@@ -32,6 +53,13 @@ $$
 $$
 y=x A^{T}+b
 $$
+
+### log_softmax
+
+`torch.nn.functional.log_softmax(input, dim=None, _stacklevel=3, dtype=None) → torch.Tensor`
+
+equals `log(softmax(x))`
+
 
 ## nn.init
 
