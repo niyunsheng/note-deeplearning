@@ -1,5 +1,3 @@
-# Vgg
-'```'
 # https://raw.githubusercontent.com/pytorch/vision/master/torchvision/models/vgg.py
 
 import torch
@@ -185,4 +183,3 @@ if __name__=="__main__":
     # print('load pretained model:',match)
     from torchsummary import summary
     summary(model, input_size=(3, 224, 224), device="cpu")
-'```'
