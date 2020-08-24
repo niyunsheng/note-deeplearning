@@ -45,9 +45,10 @@ v2: Batch Normalization: Accelerating Deep Network Training by Reducing Internal
 
 BatchNorm计算过程
 
-![](../images/batchnorm.jpg)
+![](../images/batchnorm.png)
 
 反向传播计算公式
+
 ![](../images/batchnorm_backpropagation.png)
 
 BN训练过程
