@@ -19,7 +19,7 @@
 ![](../images/vgg.jpg)
 
 
-## GoogLeNet
+## GoogLeNet V1
 
 v1: Going deeper with convolutions
 * 增加网络深度的同时，增加网络宽度，引入Inception模块
@@ -34,6 +34,8 @@ GoogLeNet架构
 ![](../images/GoogLeNet_v1_architecture.jpg)
 
 ![](../images/GoogLeNet_v1_architecture2.jpg)
+
+## GoogLeNet V2
 
 v2: Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift
 * 提出BN层用于解决数据偏移的问题（内部协变量偏移），加速网络收敛
@@ -66,6 +68,8 @@ BN训练过程
 * 推理阶段，采用训练阶段的最后一个batch之后的mean和var，推理阶段的mean和var不改变。
 
 BN推荐参考资料[莫烦ptyhon:什么是批标准化](https://mofanpy.com/tutorials/machine-learning/tensorflow/intro-batch-normalization/)
+
+## GoogLeNet V3
 
 v3: Rethinking the Inception Architecture for Computer Vision
 * 论文中提出3中不同的inception模块，代码中有5种
@@ -120,3 +124,13 @@ class LabelSmoothingCrossEntropy(nn.Module):
         loss = (1 - self.eps) * H_pq + self.eps * H_uq
         return loss.mean()
 ```
+
+## ResNet
+
+## GoogLeNet V4
+
+## ResNetXt
+
+## DenseNet
+
+## SENet
