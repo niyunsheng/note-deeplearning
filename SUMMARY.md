@@ -22,6 +22,7 @@
 * [AlexNet.py](cv_baseline/AlexNet.py)
 * [Vgg.py](cv_baseline/Vgg.py)
 * [GoogLeNet.py](cv_baseline/GoogLeNet.py)
+* [BatchNorm_test.py](cv_baseline/BatchNorm_test.py)
 
 ## 人脸验证和人脸识别
 
