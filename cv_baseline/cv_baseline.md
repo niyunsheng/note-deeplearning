@@ -64,3 +64,6 @@ BN训练过程
 `var_new = momentum * var_batch + (1 - momentum) * var_old`
 
 * 推理阶段，采用训练阶段的最后一个batch之后的mean和var，推理阶段的mean和var不改变。
+
+BN推荐参考资料[莫烦ptyhon:什么是批标准化](https://mofanpy.com/tutorials/machine-learning/tensorflow/intro-batch-normalization/)
+
