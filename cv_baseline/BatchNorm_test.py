@@ -1,3 +1,4 @@
+'```'
 import torch
 
 # 构造bn层
@@ -99,3 +100,5 @@ running_mean tensor([0.0146, 0.0008, 0.0048])
 running_var tensor([1.0314, 0.9749, 0.9797])
 num_batches_tracked tensor(4)
 '''
+
+'```'

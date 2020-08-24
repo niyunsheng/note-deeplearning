@@ -1,3 +1,4 @@
+'```'
 # https://github.com/pytorch/vision/blob/master/torchvision/models/googlenet.py
 import warnings
 from collections import namedtuple
@@ -256,3 +257,4 @@ if __name__=="__main__":
     model = GoogLeNet()
     from torchsummary import summary
     summary(model, input_size=(3, 224, 224), device="cpu")
+'```'
