@@ -67,3 +67,56 @@ BN训练过程
 
 BN推荐参考资料[莫烦ptyhon:什么是批标准化](https://mofanpy.com/tutorials/machine-learning/tensorflow/intro-batch-normalization/)
 
+v3: Rethinking the Inception Architecture for Computer Vision
+* 论文中提出3中不同的inception模块，代码中有5种
+* 只要一个辅助损失层，在17*17结束之后
+* 采用了标签平滑
+
+三种不同的inception结构如下：
+
+![](../images/inception_fig5.png)
+![](../images/inception_fig6.png)
+![](../images/inception_fig7.png)
+![](../images/inception_fig10.png)
+
+Inception V2模型架构如下：
+
+![](../images/inception_v2.png)
+
+Inception V3版本相比V2版本修改的地方有：
+1. 采用RMSProp优化方法
+1. 采用Label Smoothing正则化方法
+2. 采用非对称卷积提取17*17特征图
+3. 采用带BN的辅助分类层
+
+标签平滑的公式如下：
+
+![](../images/Label_smoothing.png)
+
+注意，其中交叉熵损失中用p的分布逼近q的分布，公式中的u指均匀分布。
+
+标签平滑的代码在torchvision中没有，不能采用CrossEntropy及其变形，需要重新写这段代码。
+
+```python
+class LabelSmoothingCrossEntropy(nn.Module):
+    """
+    Label Smoothing Cross Entropy Loss
+    """
+    def __init__(self, eps=0.001):
+        super(LabelSmoothingCrossEntropy, self).__init__()
+        self.eps = eps
+
+    def forward(self, x, target):
+        # CE(q, p) = - sigma(q_i * log(p_i))
+        log_probs = torch.nn.functional.log_softmax(x, dim=-1)  # 实现  log(p_i)
+
+        # H(q, p)
+        H_pq = -log_probs.gather(dim=-1, index=target.unsqueeze(1))  # 只需要q_i == 1的地方， 此时已经得到CE
+        H_pq = H_pq.squeeze(1)
+
+        # H(u, p)
+        H_uq = -log_probs.mean()  # 由于u是均匀分布，等价于求均值
+
+        loss = (1 - self.eps) * H_pq + self.eps * H_uq
+        return loss.mean()
+```

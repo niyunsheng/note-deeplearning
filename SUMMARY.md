@@ -16,13 +16,9 @@
 * [pytorch基础](python-base/pytorch-base.md)
 * [pytorch开发](python-base/pytorch-develop.md)
 
-## cv baseline
+## cv 基础论文
 
 * [cv baseline](cv_baseline/cv_baseline.md)
-* [AlexNet.py](cv_baseline/AlexNet.py)
-* [Vgg.py](cv_baseline/Vgg.py)
-* [GoogLeNet.py](cv_baseline/GoogLeNet.py)
-* [BatchNorm_test.py](cv_baseline/BatchNorm_test.py)
 
 ## 人脸验证和人脸识别
 
