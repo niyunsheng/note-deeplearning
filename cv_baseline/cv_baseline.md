@@ -127,6 +127,24 @@ class LabelSmoothingCrossEntropy(nn.Module):
 
 ## ResNet
 
+主要思想：让网络去拟合H(x)-x，而不是H(x)
+
+![](../images/Residual_learning.png)
+
+这种结构的好处在于：
+1. 更容易拟合恒等映射，让深度网络不至于比浅层网络差。
+2. 解决深度网络的网络退化问题。
+   1. 深度网络的表达能力更强，如果是过拟合，则训练误差应该更小
+   2. 但实际上训练误差并非更小，所以深层网络的效果差并非过拟合的问题，而是难以优化的问题
+
+在CIFAR10上的实验证明了网络退化的问题。
+
+![](../images/resnet_cifar10.png)
+
+ResNet的网络结构如下，特点可总结为：开头通过两个stride2迅速降低分辨率，然后再用4阶段残差结构堆叠，池化+FC输出。
+
+![](../images/resnet_architecture.png)
+
 ## GoogLeNet V4
 
 ## ResNetXt
