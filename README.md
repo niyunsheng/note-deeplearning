@@ -19,12 +19,12 @@
 ## cv 基础论文
 
 * [cv baseline](cv_baseline/cv_baseline.md)
-* [AlexNet.py](cv_baseline/AlexNet.py)
-* [Vgg.py](cv_baseline/Vgg.py)
-* [GoogLeNet.py](cv_baseline/GoogLeNet.py)
-* [BatchNorm_test.py](cv_baseline/BatchNorm_test.py)
-* [Inception_V3.py](cv_baseline/Inception_V3.py)
-* [ResNet.py](cv_baseline/ResNet.py)
+* [AlexNet](cv_baseline/AlexNet.py)
+* [Vgg](cv_baseline/Vgg.py)
+* [GoogLeNet](cv_baseline/GoogLeNet.py)
+* [BatchNorm_test](cv_baseline/BatchNorm_test.py)
+* [Inception_V3](cv_baseline/Inception_V3.py)
+* [ResNet/ResNeXt](cv_baseline/ResNet.py)
 
 ## 人脸验证和人脸识别
 

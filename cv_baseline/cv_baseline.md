@@ -1,5 +1,16 @@
 # CV Baseline
 
+| model | meeting | paper | first author | institute |
+| - | - | - | - | - |
+| ALexNet | NIPS2012 | ImageNet Classification with Deep Convolutional Neural Networks | Alex Krizhevsky | University of Toronto |
+| VGG | ICLR2015 | Very Deep Convolutional Networks for Large-Scale Image Recognition | Karen Simonyan/Andrew Zisserman | University of Oxford/Google DeepMind |
+| GoogLeNet V1 | CVPR2015 | Going deeper with convolutions | Christian Szegedy | Google |
+| GoogLeNet V2 | 2015 | Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate | Sergey Ioffe | Google |
+| GoogLeNet V3 | 2015 | Rethinking the Inception Architecture for Computer Vision | Christian Szegedy | Google |
+| ResNet | CVPR2016 | Deep Residual Learning for Image Recognition | Kaiming He | MSRA |
+| GoogLeNet V4 | AAAI 2017 | Inception-v4, Inception-ResNet and the Impact of Residual Connections on Learning | Christian Szegedy | Google |
+| ResNeXt | CVPR 2017 | Aggregated Residual Transformations for Deep Neural Networks | Saining Xie | UC San Diego |
+
 ## AlexNet
 
 * 数据：ImageNet
@@ -162,6 +173,26 @@ Inception-ResNet是将residual的思想加入到Inception模块当中，模块�
 ![](../images/Inception-Resnet.png)
 
 ## ResNetXt
+
+借鉴VGG和resnet使用相同块叠加和inception模型的拆分-变换-合并的思路，设计了一种简明的结构，及其两种等价形式。其中，形式B很像Inception-ResNet网络中的模块，不同的是每个分支都具有相同的拓扑结构；形式C与AlexNet中分组卷积（grouped convolutions）的理念相似，然而AlexNet使用分组卷积是受限于当时的硬件条件
+
+![](../images/ResNeXt-block.png)
+
+![](../images/ResNeXt-block-b-c.png)
+
+论文总结出一套模块化的设计理念（可减小超参数的数量），网络由一系列block堆叠而成，并遵循两个简单的原则
+* 如果block输出的特征图的空间尺寸相同，那么他们有相同的超参数（宽度、滤波器尺寸等）
+* 如果特征图的空间维度减半，那么block的宽度（通道数）加倍，第二条规则确保了所有block的计算复杂度基本相同
+
+按照这种规则设计的ResNet-50和ResNeXt-50如下图所示：
+
+![](../images/ResNeXt-50.png)
+
+提出聚合变换，并指出内积是最简单的聚合变换的形式，可分为拆分（splitting）、变换（transforming）、聚合（aggregating）。
+
+本文最重要的贡献是用聚合变化的思路将resnet和inception的优点结合，得到分组卷积。
+
+torchvision代码中的模型包括50_32\*4d和101_32\*8d这两种形式。
 
 ## DenseNet
 
