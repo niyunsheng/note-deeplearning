@@ -22,8 +22,8 @@
 ## GoogLeNet V1
 
 v1: Going deeper with convolutions
-* 增加网络深度的同时，增加网络宽度，引入Inception模块
-* 引入1*1卷积
+* 借鉴多尺度Gabor滤波器，增加网络深度的同时，增加网络宽度，引入Inception模块
+* 借鉴NIN结构，引入1*1卷积
 
 Inception模块
 
@@ -38,7 +38,7 @@ GoogLeNet架构
 ## GoogLeNet V2
 
 v2: Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift
-* 提出BN层用于解决数据偏移的问题（内部协变量偏移），加速网络收敛
+* 提出BN层用于解决数据偏移的问题（内部协变量偏移ICS），加速网络收敛
 * 开启标准化层用于神经网络的时代
   * 在Batch Normalization基础上拓展出了一系列标准化网络层，如Layer Normalization（LN），Instance Normalization（IN），Group Normalization（GN）
 * 相对v1的改变：
@@ -88,10 +88,11 @@ Inception V2模型架构如下：
 ![](../images/inception_v2.png)
 
 Inception V3版本相比V2版本修改的地方有：
+
 1. 采用RMSProp优化方法
-1. 采用Label Smoothing正则化方法
-2. 采用非对称卷积提取17*17特征图
-3. 采用带BN的辅助分类层
+2. 采用Label Smoothing正则化方法
+3. 采用非对称卷积提取17*17特征图
+4. 采用带BN的辅助分类层
 
 标签平滑的公式如下：
 
@@ -132,6 +133,7 @@ class LabelSmoothingCrossEntropy(nn.Module):
 ![](../images/Residual_learning.png)
 
 这种结构的好处在于：
+
 1. 更容易拟合恒等映射，让深度网络不至于比浅层网络差。
 2. 解决深度网络的网络退化问题。
    1. 深度网络的表达能力更强，如果是过拟合，则训练误差应该更小
@@ -146,6 +148,18 @@ ResNet的网络结构如下，特点可总结为：开头通过两个stride2迅�
 ![](../images/resnet_architecture.png)
 
 ## GoogLeNet V4
+
+提出问题:能否将Inception和ResNet结构结合，提高神经网络性能？
+
+提出两个模型架构，分别是Inception-V4和Inception-ResNet-V1/V2.
+
+Inception-V4包括六大模块，分别是Stem、Inception-A/B/C、Reduction-A/B，每个模块都有针对性的设计，共76层。
+
+![](../images/Inception-V4.png)
+
+Inception-ResNet是将residual的思想加入到Inception模块当中，模块一样，但是模块内部的差异不同，需看论文中的图进一步了解。
+
+![](../images/Inception-Resnet.png)
 
 ## ResNetXt
 
