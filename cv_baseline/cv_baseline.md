@@ -2,14 +2,17 @@
 
 | model | meeting | paper | first author | institute |
 | - | - | - | - | - |
-| ALexNet | NIPS2012 | ImageNet Classification with Deep Convolutional Neural Networks | Alex Krizhevsky | University of Toronto |
-| VGG | ICLR2015 | Very Deep Convolutional Networks for Large-Scale Image Recognition | Karen Simonyan/Andrew Zisserman | University of Oxford/Google DeepMind |
-| GoogLeNet V1 | CVPR2015 | Going deeper with convolutions | Christian Szegedy | Google |
+| ALexNet | NIPS 2012 | ImageNet Classification with Deep Convolutional Neural Networks | Alex Krizhevsky | University of Toronto |
+| VGG | ICLR 2015 | Very Deep Convolutional Networks for Large-Scale Image Recognition | Karen Simonyan/Andrew Zisserman | University of Oxford/Google DeepMind |
+| GoogLeNet V1 | CVPR 2015 | Going deeper with convolutions | Christian Szegedy | Google |
 | GoogLeNet V2 | 2015 | Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate | Sergey Ioffe | Google |
 | GoogLeNet V3 | 2015 | Rethinking the Inception Architecture for Computer Vision | Christian Szegedy | Google |
 | ResNet | CVPR2016 | Deep Residual Learning for Image Recognition | Kaiming He | MSRA |
 | GoogLeNet V4 | AAAI 2017 | Inception-v4, Inception-ResNet and the Impact of Residual Connections on Learning | Christian Szegedy | Google |
 | ResNeXt | CVPR 2017 | Aggregated Residual Transformations for Deep Neural Networks | Saining Xie | UC San Diego |
+| DenseNet | CVPR 2017 | Densely Connected Convolutional Networks | Gao Huang/Zhuang Liu | Cornell University/Tsinghua University |
+ SENet | CVPR 2018 | Squeeze-and-Excitation Networks | Jie Hu | Chinese Academy of Sciences |
+
 
 ## AlexNet
 
@@ -195,5 +198,40 @@ Inception-ResNet是将residual的思想加入到Inception模块当中，模块�
 torchvision代码中的模型包括50_32\*4d和101_32\*8d这两种形式。
 
 ## DenseNet
+
+本文在ResNet的基础上，沿用VGG的简洁结构设计，同时堆叠的building block采用残差结构，在前人对于short path的研究基础上提出了新的角度（即特征复用和信息流通不畅的角度），并且指出了特征复用可以提高模型的表达能力。
+
+网络采用dense block和下采样层组成，因为稠密连接不能连接不同大小的feature map。
+
+dense block包括三个部分，BN-ReLU-Conv，其结构如下：
+
+![](../images/dense_block.png)
+
+拥有三个dense block的denseNet的结构如下：
+
+![](../images/denseNet_3block.png)
+
+用于Imagenet的网络包含4个dense block的DenseNet-BC结构，输入尺寸为224*224，结构如下：
+
+![](../images/denseNet_imageNet.png)
+
+DenseNet-B表示基于bottlenet的dense block，结构为 `BN-ReLU-Conv(1*1)-BN-ReLU-Conv(3*3)`
+
+网络还设计了其他的超参数来限制网络的自由度
+* 增长速率k：每个组合函数产生k个特征图，那么，之后的第i层就有k0+k*(i-1)个特征图作为输入
+* 压缩系数θ：表示在bottleNet结构中，先用`1*1`卷积从`m`降低通道数目为`θ*m`
+
+DenseNet的一个重要缺点是**显存占用大**，参考[深度学习中的GPU和显存分析](https://zhuanlan.zhihu.com/p/31558973)，深度学习中显存占用量较大的包括：
+* 模型自身的参数
+* 模型的输出
+
+如果是在训练阶段，根据优化函数的不同，模型参数要保存的梯度的量也有区别。
+* 不带动量的SGD，只需要保存梯度即可，占用显存=参数的显存
+* 带动量的SGD，需要保存参数的梯度和梯度的动量（即上一时刻的梯度），占用显存=2*参数的显存
+* Adam优化器，占用显存=2*参数的显存
+
+在训练阶段，也要保存模型的输出的梯度，输出的梯度不需要计算动量。
+
+在DenseNet中，模型输出的梯度占用的显存最大，是问题的核心所在。
 
 ## SENet
