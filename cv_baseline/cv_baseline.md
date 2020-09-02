@@ -247,6 +247,16 @@ SE block的结构如下，包括squeeze操作、excitation操作和一个scale�
 
 ![](../images/SE-block.png)
 
+作为即插即用模块，SE block和Inception或者ResNet结合的示意图如下：
+
+![](../images/SE-Inception.png)
+
+![](../images/SE-ResNet.png)
+
+加入SE block的ResNet-50以及ResNeXt-50的结构如下图所示：
+
+![](../images/SE-ResNet-50.png)
+
 其次，值得关注的点是文章中详细的消融研究的实验，即控制变量法来对比不同的设置的表现。
 
 最后，用实例来验证了SE block的作用，从ImageNet数据集中抽取了四个类，这些类表现出语义和外观多样性，即金鱼，哈巴狗，刨和悬崖；然后从验证集中为每个类抽取50个样本，并计算每个阶段最后的SE块中50个均匀采样通道的平均激活（紧接在下采样之前），并在图7中绘制它们的分布
