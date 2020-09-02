@@ -25,6 +25,8 @@
 * [BatchNorm_test](cv_baseline/BatchNorm_test.py)
 * [Inception_V3](cv_baseline/Inception_V3.py)
 * [ResNet/ResNeXt](cv_baseline/ResNet.py)
+* [DenseNet](cv_baseline/DenseNet.py)
+* [SENet](cv_baseline/se_resnet.py)
 
 ## 人脸验证和人脸识别
 
