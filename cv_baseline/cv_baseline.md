@@ -11,7 +11,7 @@
 | GoogLeNet V4 | AAAI 2017 | Inception-v4, Inception-ResNet and the Impact of Residual Connections on Learning | Christian Szegedy | Google |
 | ResNeXt | CVPR 2017 | Aggregated Residual Transformations for Deep Neural Networks | Saining Xie | UC San Diego |
 | DenseNet | CVPR 2017 | Densely Connected Convolutional Networks | Gao Huang/Zhuang Liu | Cornell University/Tsinghua University |
- SENet | CVPR 2018 | Squeeze-and-Excitation Networks | Jie Hu | Chinese Academy of Sciences |
+| SENet | CVPR 2018 | Squeeze-and-Excitation Networks | Jie Hu | Chinese Academy of Sciences |
 
 
 ## AlexNet
