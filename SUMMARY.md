@@ -28,7 +28,9 @@
 
 ## 目标检测
 
-* [目标检测数据集](object-detection/datasets.md)
+* [目标检测数据集](object-detection/detection-datasets.md)
+* [目标检测经典论文](object-detection/object-detection-papers.md)
+
 
 ## 搜索系统
 
