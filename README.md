@@ -32,9 +32,9 @@
 
 ## 人脸验证和人脸识别
 
-* [2d人脸对齐](FaceVerification_FacerRcognition/warp_and_crop_face.md)
-* [face loss](FaceVerification_FacerRcognition/face_loss.md)
-* [face dataset](FaceVerification_FacerRcognition/face-datasets.md)
+* [2d人脸对齐](fr/warp_and_crop_face.md)
+* [face loss](fr/face_loss.md)
+* [face dataset](fr/face-datasets.md)
 
 ## 目标检测
 
