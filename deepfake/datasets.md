@@ -2,6 +2,7 @@
 
 | dataset | publish date | conference | author |
 | - | - | - | - |
+| [DFD]()
 | [FF++(FaceForensics++)](https://github.com/ondyari/FaceForensics) | 25 Jan 2019 | iccv19 | Andreas R¨ossler(Technical University of Munich) | 
 | [Celeb-DF](http://www.cs.albany.edu/~lsw/celeb-deepfakeforensics.html) | 27 Sep 2019 | cpvr20 | Yuezun Li(University at Albany) |
 | [DeeperForensics-1.0](https://github.com/EndlessSora/DeeperForensics-1.0) | 9 Jan 2020 | cvpr20 | Liming Jiang(NTU Singapore), wuwenyan(sensetime) |
@@ -10,28 +11,48 @@
 ## FF++
 
 [benchmark results for the Binary Classification](http://kaldir.vc.in.tum.de/faceforensics_benchmark/)
+下载benchmark图片（），然后按格式提交对每张图片的预测，即可得到结果。
 
 ```
 root-dir:
     manipulated_sequences:
         DeepFakeDetection
-            c23/videos # 3068个假视频，文件名包含了替换方式
+            raw/c23/c40 # 每种方式3068个假视频，文件名包含了替换方式
                 <target actor>_<source actor>__<sequence name>__<8 charactor long experiment id>.mp4
-            mask/videos: # 和videos相对应
+                raw/0: ~200GB
+                23: ~3GB
+                40: ~400MB
+            mask: # 和videos相对应
         Deepfakes|Face2Face|FaceSwap|NeuralTextures
-            c23/videos # 1000个视频，一对之间相互交换，四种变换均相同
+            raw/c23/c40 # 1000个视频，一对之间相互交换，四种变换均相同
                 <target sequence>_<source sequence>.mp4 # source 提供人脸，target提供背景
-            mask/videos: # 和videos相对应
+                raw/0: ~1.6TB
+                c23: ~22GB
+                c40: ~3GB
+            mask: # 和videos相对应
     original_sequences:
         actors/c23/videos # 16个不同场景中28位付费演员的363个原始序列
             <actor number>__<scene name>.mp4
-        youtube/c23/videos # 1000个视频
-            000.mp4~999.mp4
+        youtube # 都是1000个视频，分辨率不同
+            < c0/raw original sequence images/videos of the FaceForensics++ dataset > 
+                ~500GB
+            < c23/hq original sequence images/videos >
+                ~10GB
+            < c40/lq original sequence images/videos >
+                ~2GB
 ```
 
 ### 技术路线
 
-Face2Face,FaceSwap,DeepFakes,NeuralTextures
+| forensics type | publish | author | tutorial | description | 
+|----------------|--------------|--------| -------- | ----- |
+| [Deepfakes](https://github.com/deepfakes/faceswap)      | first commit: Dec 15, 2017    |        |         | 换脸，learning-based |
+| [Faceswap](https://github.com/deepfakes/faceswap)    | the same  |        |        | 换脸，computer graphics-based |
+| [Face2Face](https://openaccess.thecvf.com/content_cvpr_2016/html/Thies_Face2Face_Real-Time_Face_CVPR_2016_paper.html)  |  cvpr16     | Justus Thies(University of Erlangen-Nuremberg)  |         | 换表情，computer graphics-based |
+| [NeuralTextures](https://arxiv.org/abs/1904.12356) | ACM Graphics on Transactions(28 Apr 2019)    | Justus Thies(Technical University of Munich)       |        | 换脸，learning-based |
+
+benchmark
+![](./FF++benchmark.png)
 
 ## Celeb-DF
 
