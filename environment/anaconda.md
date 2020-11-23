@@ -167,3 +167,13 @@ os.environ["CUDA_VISIBLE_DEVICES"]="0,2"
 | CUDA 8.0 (8.0.44)                                 | >= 367.48                   | >= 369.30                     |
 | CUDA 7.5 (7.5.16)                                 | >= 352.31                   | >= 353.66                     |
 | CUDA 7.0 (7.0.28)                                 | >= 346.46                   | >= 347.62                     |
+
+## 安装tensorflow
+
+不要用pip安装，因为pip安装需要自己去安装其他的包，用conda一键安装，同样不需要本机安装cudatoolkit。
+
+```
+conda create --name tf1.14 python=3.7
+conda activate tf1.14
+conda install tensorflow-gpu==1.14
+```
