@@ -177,3 +177,7 @@ conda create --name tf1.14 python=3.7
 conda activate tf1.14
 conda install tensorflow-gpu==1.14
 ```
+
+## 其他
+
+* 如果某些包下载过慢，可以在网站下载后缀为`.conda`的包，放入文件夹`~/anaconda3/pkgs/`，然后采用本地安装的方式，如安装`tensorflow-base-1.14.0-gpu_py37he45bfe2_0.conda`，安装命令为`conda install --use-local tensorflow-base-1.14.0-gpu_py37he45bfe2_0.conda`
