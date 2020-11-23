@@ -51,8 +51,14 @@ root-dir:
 | [Face2Face](https://openaccess.thecvf.com/content_cvpr_2016/html/Thies_Face2Face_Real-Time_Face_CVPR_2016_paper.html)  |  cvpr16     | Justus Thies(University of Erlangen-Nuremberg)  |         | 换表情，computer graphics-based |
 | [NeuralTextures](https://arxiv.org/abs/1904.12356) | ACM Graphics on Transactions(28 Apr 2019)    | Justus Thies(Technical University of Munich)       |        | 换脸，learning-based |
 
+共1000个视频，分成500对，按照360、70、70的比例划分train/test/val。
+因为是两两交换，所以伪造视频也是1000个。
+
 benchmark
 ![](./FF++benchmark.png)
+
+更新FF++中提供的代码，可以进行二分类的训练和测试，并复现上述结果。
+见[FaceForensics](https://github.com/niyunsheng/FaceForensics)
 
 ## Celeb-DF
 
