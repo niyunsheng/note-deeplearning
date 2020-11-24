@@ -100,7 +100,7 @@ c.NotebookApp.port =8888 #随便指定一个你想要的端口,后面可以从�
 ## conda和pip
 
 Conda是一种通用包管理系统，旨在构建和管理任何语言的任何类型的软件。因此，它也适用于Python包。
-Conda和pip服务于不同的目的，并且只在一小部分任务中直接竞争：即在孤立的环境中安装Python包。
+Conda和pip服务于不同的目的，并且只在一小部分任务中直接竞争：**即在孤立的环境中安装Python包**。
 
 在conda环境中一般会有pip，用`which pip`命令可以查看到当前用的pip即为当前conda环境中的pip。
 
@@ -177,6 +177,12 @@ conda create --name tf1.14 python=3.7
 conda activate tf1.14
 conda install tensorflow-gpu==1.14
 ```
+
+## 安装opencv
+
+用pip安装不会安装其他的依赖`pip install opencv-python`，可能还需要执行`apt install libgl1-mesa-glx`
+
+最好用conda安装，会自动安装其他的依赖`conda install opencv`
 
 ## 其他
 
