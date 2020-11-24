@@ -182,7 +182,7 @@ conda install tensorflow-gpu==1.14
 
 用pip安装不会安装其他的依赖`pip install opencv-python`，可能还需要执行`apt install libgl1-mesa-glx`
 
-最好用conda安装，会自动安装其他的依赖`conda install opencv`
+最好用conda安装，会自动安装其他的依赖`conda install opencv`【这个也有个问题，就是安装会把torch转化为cpu版本，待解决】
 
 ## 其他
 
