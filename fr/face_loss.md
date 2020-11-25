@@ -17,7 +17,7 @@
 * Inter-class Discrepancy
 
 Comparison of open-set and closed-set recognition
-![](./openset&closeset.png)
+![](./images/openset&closeset.png)
 
 ## Contrastive Loss
 
@@ -31,7 +31,7 @@ $$
 \end{array}
 $$
 
-![](./ContrastiveLoss.png)
+![](./images/ContrastiveLoss.png)
 
 ## Triplet Loss
 
@@ -39,9 +39,9 @@ $$
 \sum_{i}^{N}\left[\left\|f\left(x_{i}^{a}\right)-f\left(x_{i}^{p}\right)\right\|_{2}^{2}-\left\|f\left(x_{i}^{a}\right)-f\left(x_{i}^{n}\right)\right\|_{2}^{2}+\alpha\right]_{+}
 $$
 
-![](./TripletLoss.png)
+![](./images/TripletLoss.png)
 
-![](./hardmargin.png)
+![](./images/hardmargin.png)
 
 ## Center Loss
 
@@ -54,7 +54,7 @@ $$
 \end{aligned}
 $$
 
-![](./CenterLoss.png)
+![](./images/CenterLoss.png)
 
 ## L-Softmax Loss
 
@@ -75,7 +75,7 @@ L_{i}=-\log \left(\frac{e^{\left\|\boldsymbol{W}_{y_{i}}\right\|\left\|\boldsymb
 \psi(\theta)=(-1)^{k} \cos (m \theta)-2 k, \quad \theta \in\left[\frac{k \pi}{m}, \frac{(k+1) \pi}{m}\right] \\
 $$
 
-![](./L-softmax.png)
+![](./images/L-softmax.png)
 
 ## SphereFace
 
@@ -87,7 +87,7 @@ $$
 \end{aligned}
 $$
 
-![](./SphereFace.png)
+![](./images/SphereFace.png)
 
 ## CosFace
 
@@ -110,7 +110,7 @@ $$
 L_{l m c}=\frac{1}{N} \sum_{i}-\log \frac{e^{s\left(\cos \left(\theta_{y_{i}, i}\right)-m\right)}}{e^{s\left(\cos \left(\theta_{y_{i}, i}\right)-m\right)}+\sum_{j \neq y_{i}} e^{s \cos \left(\theta_{j, i}\right)}}
 $$
 
-![](./cosface.png)
+![](./images/cosface.png)
 
 ## Arcface
 
@@ -122,11 +122,11 @@ L_{4}=-\frac{1}{N} \sum_{i=1}^{N} \log \frac{e^{s\left(\cos \left(m_{1} \theta_{
 \end{array}
 $$
 
-![](./arcface1.png)
+![](./images/arcface1.png)
 
-![](./arcface2.png)
+![](./images/arcface2.png)
 
-![](./arcface3.png)
+![](./images/arcface3.png)
 
 ## 人脸损失可视化
 
