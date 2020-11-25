@@ -123,7 +123,7 @@ $$\left[\begin{matrix}s * cos\theta & s * {(-sin\theta)} & t_{x} \\ s * sin\thet
 
 相比仿射变换，相似变换的自由度较小，左上角2×2矩阵为旋转部分，tx和ty为平移因子，它有4个自由度，即旋转，x方向平移，y方向平移和缩放因子s。
 
-## 仿射变换
+## 补充知识：仿射变换
 
 > 本部分内容参考《计算机图形学导论》第五章：几何变换
 
@@ -169,7 +169,7 @@ $$
 \left[\begin{matrix} x & y & 1 \end{matrix}\right] * \left[\begin{matrix}1 & 0 & 0 \\ 0 & 1 & 0 \\ -t_x & -t_y & 1\end{matrix}\right] * \left[\begin{matrix}cos{\theta} & sin{\theta} & 0 \\ -sin{\theta} & cos{\theta} & 0 \\ 0 & 0 & 1\end{matrix}\right] * \left[\begin{matrix}1 & 0 & 0 \\ 0 & 1 & 0 \\ t_x & t_y & 1\end{matrix}\right]
 $$
 
-## opencv中的仿射变换
+### opencv中的仿射变换
 
 `crop_img = cv2.warpAffine(src_img, tfm, (crop_size[0], crop_size[1]))`
 
