@@ -55,10 +55,13 @@ root-dir:
 因为是两两交换，所以伪造视频也是1000个。
 
 benchmark
-![](./FF++benchmark.png)
+![](./images/FF++benchmark.png)
 
 更新FF++中提供的代码，可以进行二分类的训练和测试，并复现上述结果。
 见[FaceForensics](https://github.com/niyunsheng/FaceForensics)
+
+我更新了其中binary classification的代码，可以直接用来训练以得到论文中的结果。
+[my repository](https://github.com/niyunsheng/FaceForensics)
 
 ## Celeb-DF
 
@@ -82,7 +85,7 @@ root-dir:
 使用改进的DeepFake合成方法生成的，59个名人，590个视频，相互交换人脸生成假视频。
 
 原始的DeepFake技术路线如下图所示：
-![](./Celeb-DF-fig3.png)
+![](./images/Celeb-DF-fig3.png)
 
 改进方法有以下四点：
 * 提高分辨率：将合成人脸的分辨率提高到256*256，通过使用具有更多层和更大尺寸的编码器和解码器模型来实现，分辨率较高的话不仅视觉效果好，而且适应输入人脸时，调整大小和旋转操作的影响较小。
@@ -132,7 +135,7 @@ DeeperForensics-1.0
 * 解决画面风格不匹配的问题（如源和目标肤色不同）
 * 应考虑生成视频的时间连续性
 
-![](./DeeperForensics-1.0-fig6.png)
+![](./images/DeeperForensics-1.0-fig6.png)
 
 新提出的多对多人脸交换方法，即DeepFake变体自动编码器（DF-VAE）。包括三个部分：结构提取，解耦合，融合。
 
