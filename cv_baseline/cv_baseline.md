@@ -20,7 +20,7 @@
 * 算法：GPU
 * 模型：深度卷积神经网络
 
-![](../images/alexnet.jpg)
+![](./images/alexnet.jpg)
 
 
 ## VGG
@@ -30,7 +30,7 @@
 * 可以将网络表示为`[[Conv2d+ReLU]*m+MaxPool2d]*n + Linear`
 * 如果增加bn层，将`[Conv2d+ReLU]`修改为`[Conv2d+BatchNorm2d+ReLU]`
 
-![](../images/vgg.jpg)
+![](./images/vgg.jpg)
 
 
 ## GoogLeNet V1
@@ -41,13 +41,13 @@ v1: Going deeper with convolutions
 
 Inception模块
 
-![](../images/Inception_v1.jpg)
+![](./images/Inception_v1.jpg)
 
 GoogLeNet架构
 
-![](../images/GoogLeNet_v1_architecture.jpg)
+![](./images/GoogLeNet_v1_architecture.jpg)
 
-![](../images/GoogLeNet_v1_architecture2.jpg)
+![](./images/GoogLeNet_v1_architecture2.jpg)
 
 ## GoogLeNet V2
 
@@ -61,15 +61,15 @@ v2: Batch Normalization: Accelerating Deep Network Training by Reducing Internal
 
 BatchNorm计算过程
 
-![](../images/batchnorm.png)
+![](./images/batchnorm.png)
 
 反向传播计算公式
 
-![](../images/batchnorm_backpropagation.png)
+![](./images/batchnorm_backpropagation.png)
 
 BN训练过程
 
-![](../images/batchnorm_training.png)
+![](./images/batchnorm_training.png)
 
 注意：
 * bn层中每个channel一个均值一个方差，channel的均值和方差的调整过程遵循动量的原则。
@@ -92,14 +92,14 @@ v3: Rethinking the Inception Architecture for Computer Vision
 
 三种不同的inception结构如下：
 
-![](../images/inception_fig5.png)
-![](../images/inception_fig6.png)
-![](../images/inception_fig7.png)
-![](../images/inception_fig10.png)
+![](./images/inception_fig5.png)
+![](./images/inception_fig6.png)
+![](./images/inception_fig7.png)
+![](./images/inception_fig10.png)
 
 Inception V2模型架构如下：
 
-![](../images/inception_v2.png)
+![](./images/inception_v2.png)
 
 Inception V3版本相比V2版本修改的地方有：
 
@@ -110,7 +110,7 @@ Inception V3版本相比V2版本修改的地方有：
 
 标签平滑的公式如下：
 
-![](../images/Label_smoothing.png)
+![](./images/Label_smoothing.png)
 
 注意，其中交叉熵损失中用p的分布逼近q的分布，公式中的u指均匀分布。
 
@@ -144,7 +144,7 @@ class LabelSmoothingCrossEntropy(nn.Module):
 
 主要思想：让网络去拟合H(x)-x，而不是H(x)
 
-![](../images/Residual_learning.png)
+![](./images/Residual_learning.png)
 
 这种结构的好处在于：
 
@@ -155,11 +155,11 @@ class LabelSmoothingCrossEntropy(nn.Module):
 
 在CIFAR10上的实验证明了网络退化的问题。
 
-![](../images/resnet_cifar10.png)
+![](./images/resnet_cifar10.png)
 
 ResNet的网络结构如下，特点可总结为：开头通过两个stride2迅速降低分辨率，然后再用4阶段残差结构堆叠，池化+FC输出。
 
-![](../images/resnet_architecture.png)
+![](./images/resnet_architecture.png)
 
 ## GoogLeNet V4
 
@@ -169,19 +169,19 @@ ResNet的网络结构如下，特点可总结为：开头通过两个stride2迅�
 
 Inception-V4包括六大模块，分别是Stem、Inception-A/B/C、Reduction-A/B，每个模块都有针对性的设计，共76层。
 
-![](../images/Inception-V4.png)
+![](./images/Inception-V4.png)
 
 Inception-ResNet是将residual的思想加入到Inception模块当中，模块一样，但是模块内部的差异不同，需看论文中的图进一步了解。
 
-![](../images/Inception-Resnet.png)
+![](./images/Inception-Resnet.png)
 
 ## ResNetXt
 
 借鉴VGG和resnet使用相同块叠加和inception模型的拆分-变换-合并的思路，设计了一种简明的结构，及其两种等价形式。其中，形式B很像Inception-ResNet网络中的模块，不同的是每个分支都具有相同的拓扑结构；形式C与AlexNet中分组卷积（grouped convolutions）的理念相似，然而AlexNet使用分组卷积是受限于当时的硬件条件
 
-![](../images/ResNeXt-block.png)
+![](./images/ResNeXt-block.png)
 
-![](../images/ResNeXt-block-b-c.png)
+![](./images/ResNeXt-block-b-c.png)
 
 论文总结出一套模块化的设计理念（可减小超参数的数量），网络由一系列block堆叠而成，并遵循两个简单的原则
 * 如果block输出的特征图的空间尺寸相同，那么他们有相同的超参数（宽度、滤波器尺寸等）
@@ -189,7 +189,7 @@ Inception-ResNet是将residual的思想加入到Inception模块当中，模块�
 
 按照这种规则设计的ResNet-50和ResNeXt-50如下图所示：
 
-![](../images/ResNeXt-50.png)
+![](./images/ResNeXt-50.png)
 
 提出聚合变换，并指出内积是最简单的聚合变换的形式，可分为拆分（splitting）、变换（transforming）、聚合（aggregating）。
 
@@ -205,15 +205,15 @@ torchvision代码中的模型包括50_32\*4d和101_32\*8d这两种形式。
 
 dense block包括三个部分，BN-ReLU-Conv，其结构如下：
 
-![](../images/dense_block.png)
+![](./images/dense_block.png)
 
 拥有三个dense block的denseNet的结构如下：
 
-![](../images/denseNet_3block.png)
+![](./images/denseNet_3block.png)
 
 用于Imagenet的网络包含4个dense block的DenseNet-BC结构，输入尺寸为224*224，结构如下：
 
-![](../images/denseNet_imageNet.png)
+![](./images/denseNet_imageNet.png)
 
 DenseNet-B表示基于bottlenet的dense block，结构为 `BN-ReLU-Conv(1*1)-BN-ReLU-Conv(3*3)`
 
@@ -245,22 +245,22 @@ SE block的结构如下，包括squeeze操作、excitation操作和一个scale�
 * excitation操作具体是两个全连接层：linear-relu-linear-sigmoid
 * scale即为一个乘法操作
 
-![](../images/SE-block.png)
+![](./images/SE-block.png)
 
 作为即插即用模块，SE block和Inception或者ResNet结合的示意图如下：
 
-![](../images/SE-Inception.png)
+![](./images/SE-Inception.png)
 
-![](../images/SE-ResNet.png)
+![](./images/SE-ResNet.png)
 
 加入SE block的ResNet-50以及ResNeXt-50的结构如下图所示：
 
-![](../images/SE-ResNet-50.png)
+![](./images/SE-ResNet-50.png)
 
 其次，值得关注的点是文章中详细的消融研究的实验，即控制变量法来对比不同的设置的表现。
 
 最后，用实例来验证了SE block的作用，从ImageNet数据集中抽取了四个类，这些类表现出语义和外观多样性，即金鱼，哈巴狗，刨和悬崖；然后从验证集中为每个类抽取50个样本，并计算每个阶段最后的SE块中50个均匀采样通道的平均激活（紧接在下采样之前），并在图7中绘制它们的分布
 
-![](../images/SE-block-role.png)
+![](./images/SE-block-role.png)
 
 输出值越动荡，说明SE对channel具有选择作用，从图中可以看出：前三个stage的方差较大，最后一个stage的后两个block的方差较小，因此可以不加SE block，以节省参数。
