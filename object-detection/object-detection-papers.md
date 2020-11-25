@@ -1,6 +1,6 @@
 # object detection
 
-| model | meeting | paper | first author | institute |
+| model | conference | paper | first author | institute |
 | - | - | - | - | - |
 | RCNN | CVPR 2014 | Rich feature hierarchies for accurate object detection and semantic segmentation | Ross Girshick | UC Berkeley |
 | Fast RCNN | ICCV 2015 | Fast R-CNN | Ross Girshick | Microsoft Research |

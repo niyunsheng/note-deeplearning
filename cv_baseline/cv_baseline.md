@@ -1,6 +1,6 @@
 # CV Baseline
 
-| model | meeting | paper | first author | institute |
+| model | conference | paper | first author | institute |
 | - | - | - | - | - |
 | ALexNet | NIPS 2012 | ImageNet Classification with Deep Convolutional Neural Networks | Alex Krizhevsky | University of Toronto |
 | VGG | ICLR 2015 | Very Deep Convolutional Networks for Large-Scale Image Recognition | Karen Simonyan/Andrew Zisserman | University of Oxford/Google DeepMind |
