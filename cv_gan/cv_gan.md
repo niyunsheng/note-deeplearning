@@ -14,4 +14,6 @@
 | StyleGAN | CVPR 2019 | A Style-Based Generator Architecture for Generative Adversarial Networks | Tero Karras | NVIDIA |
 
 GAN演进图谱
-![GAN演进图谱](./gan-development.jpg)
+![GAN演进图谱](./images/gan-development.jpg)
+
+* 参考学习笔记[seeprettyface](http://www.seeprettyface.com/research_notes.html)

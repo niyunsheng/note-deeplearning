@@ -13,6 +13,15 @@
 | DenseNet | CVPR 2017 | Densely Connected Convolutional Networks | Gao Huang/Zhuang Liu | Cornell University/Tsinghua University |
 | SENet | CVPR 2018 | Squeeze-and-Excitation Networks | Jie Hu | Chinese Academy of Sciences |
 
+code
+* [AlexNet](./codes/AlexNet.py)
+* [Vgg](./codes/Vgg.py)
+* [GoogLeNet](./codes/GoogLeNet.py)
+* [BatchNorm_test](./codes/BatchNorm_test.py)
+* [Inception_V3](./codes/Inception_V3.py)
+* [ResNet/ResNeXt](./codes/ResNet.py)
+* [DenseNet](./codes/DenseNet.py)
+* [SENet](./codes/se_resnet.py)
 
 ## AlexNet
 
@@ -73,7 +82,7 @@ BN训练过程
 
 注意：
 * bn层中每个channel一个均值一个方差，channel的均值和方差的调整过程遵循动量的原则。
-* 可查看代码 [BatchNorm_test](./BatchNorm_test.py)
+* 可查看代码 [BatchNorm_test](./codes/BatchNorm_test.py)
 
 `mean_new = momentum * mean_batch + (1 - momentum) * mean_old`
 

@@ -113,7 +113,7 @@ $$
 
 ### `nn.Conv2d`
 
-![](../images/conv_equation.svg)
+![](./images/conv_equation.svg)
 
 ### `nn.MaxPool2d`和`nn.AvgPool2d`
 

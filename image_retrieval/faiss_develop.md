@@ -2,7 +2,7 @@
 
 ## UML类图
 
-![](../images/Faiss.svg)
+![](./images/Faiss.svg)
 
 ## Code Structure
 
