@@ -14,7 +14,9 @@
 ## cv 论文和数据集
 
 * [cv基础论文](cv_baseline/cv_baseline.md)
+* [cv基础数据库](cv_baseline/datasets.md)
 * [预训练模型和常用库](cv_baseline/pretrained_models.md)
+* [CNN可视化](visualization/visualization.md)
 * [2d人脸对齐](fr/warp_and_crop_face.md)
 * [人脸识别经典论文](fr/face_loss.md)
 * [人脸数据集](fr/face-datasets.md)
