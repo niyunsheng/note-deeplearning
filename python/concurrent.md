@@ -298,3 +298,9 @@ produce(c)
 最后套用Donald Knuth的一句话总结协程的特点：
 
 **“子程序就是协程的一种特例。”**
+
+## web框架中的进程和共享变量的问题
+
+关键词： 绝大部分 python 框架都是多进程模型，或者叫 pre fork，或者叫 进程池
+
+测试代码：[test-flask](./test-flask.py)
