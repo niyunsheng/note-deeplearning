@@ -15,6 +15,8 @@
 * `start()` 子进程开始执行
 * `join()` 同步机制，主进程等待该子进程结束
 * `terminate()` 强制杀死子进程
+* `pid` 获取该进程的pid
+* `is_alive()` 查看该子进程是否运行结束
 
 多个同样任务的子进程用进程池`multiprocessing.Pool`
 * `close()` 关闭进程池，不再接收新任务
@@ -161,7 +163,13 @@ Process to read: 1696275
 Process to read: 1696276
 ```
 
+### `subprocess`
 
+`Popen`提供了`os.system`的一个高级接口，可以获取子进程的状态等信息
+* `pid` 获取该命令对应的shell的pid，通常来说在该shell中运行的进程pid是该shell的pid+1
+* `poll()` 获取子进程的状态码，为None表示程序正在运行，为0表示正常结束
+
+在命令行执行另一个程序，如果采用传入参数，则可能有安全漏洞，**传入参数可能包含恶意代码**。
 
 ## 线程
 
@@ -210,6 +218,50 @@ if __name__=='__main__':
     pw1.join()
     pw2.join()
 ```
+
+### 线程池
+
+`threading`模块中不能实现线程池，可以用`concurrent.futures.ThreadPoolExecutor`，有两种方法，一种是submit（）函数，另一种是map（）函数，两者的主要区别在于：
+* map可以保证输出的顺序, submit输出的顺序是乱的
+* 如果你要提交的任务的函数是一样的，就可以简化成map。但是假如提交的任务函数是不一样的，或者执行的过程之可能出现异常（使用map执行过程中发现问题会直接抛出错误）就要用到submit（）
+* submit和map的参数是不同的，submit每次都需要提交一个目标函数和对应的参数，map只需要提交一次目标函数，目标函数的参数放在一个迭代器（列表，字典）里就可以。
+
+参考[concurrent.futures](https://docs.python.org/3/library/concurrent.futures.html)
+
+使用map的示例如下：
+
+```python
+from concurrent.futures import ThreadPoolExecutor
+import time
+
+def sayhello(a):
+    print("hello: "+a)
+    time.sleep(2)
+
+def main():
+    seed=["a","b","c"]
+    start1=time.time()
+    for each in seed:
+        sayhello(each)
+    end1=time.time()
+    print("time1: "+str(end1-start1))
+    start2=time.time()
+    with ThreadPoolExecutor(3) as executor:
+        for each in seed:
+            executor.submit(sayhello,each)
+    end2=time.time()
+    print("time2: "+str(end2-start2))
+    start3=time.time()
+    with ThreadPoolExecutor(3) as executor1:
+        executor1.map(sayhello,seed)
+    end3=time.time()
+    print("time3: "+str(end3-start3))
+
+if __name__ == '__main__':
+    main()
+```
+
+
 
 ### 对多线程的GIL的进一步解释
 
