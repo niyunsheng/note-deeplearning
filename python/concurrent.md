@@ -356,3 +356,7 @@ produce(c)
 关键词： 绝大部分 python 框架都是多进程模型，或者叫 pre fork，或者叫 进程池
 
 测试代码：[test-flask](./test-flask.py)
+
+flask会在`app.run(debug=True, host='0.0.0.0')`这句开始pre fork当前进行对请求进行响应，不同的进程可以通过队列通信，如下例：
+
+测试代码：[test-flask2](./test-flask2.py)
