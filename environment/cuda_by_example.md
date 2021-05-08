@@ -3,7 +3,7 @@
 参考
 * [CUDA官方入门教程](https://devblogs.nvidia.com/even-easier-introduction-cuda/)
 
-* [书籍笔记：GPU高性能编程 CUDA实战](https://blog.csdn.net/fishseeker/article/details/75093166)
+* [其他书籍笔记：GPU高性能编程 CUDA实战](https://blog.csdn.net/fishseeker/article/details/75093166)
 
 ## 总览
 
@@ -19,7 +19,7 @@ CUDA编程模型是一个异构模型，需要CPU和GPU协同工作。在CUDA中
 4. 将device上的运算结果拷贝到host上；
 5. 释放device和host上分配的内存。
 
-cuda中通过函数类型限定词开区别host和device上的函数，主要的三个函数类型限定词如下：
+cuda中通过函数类型限定词区别开host和device上的函数，主要的三个函数类型限定词如下：
 
 * `__global__`：在device上执行，从host中调用（一些特定的GPU也可以从device上调用），返回类型必须是void，不支持可变参数参数，不能成为类成员函数。注意用`__global__`定义的kernel是异步的，这意味着**host不会等待kernel执行完就执行下一步**。`__global__`标识符高速编译器，函数应该编译为在设备而不是主机上运行。
 * `__device__`：在device上执行，单仅可以从device中调用，不可以和`__global__`同时用。
@@ -238,6 +238,8 @@ __global__ void dot( float *a, float *b, float *c ) {
     cudaEventDestroy( start );
     cudaEventDestroy( stop );
 ```
+
+PS：以下工作暂不更新
 
 ## 7 纹理内存
 

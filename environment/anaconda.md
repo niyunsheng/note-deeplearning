@@ -1,44 +1,16 @@
-# anaconda
+# 深度学习基础环境anaconda/pytorch
+
+## anaconda
 
 ## 安装
 
 * 在tuna上下载anaconda[安装包](https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive)
-
 * 在终端执行命令安装`bash Anaconda-name.sh`
+* 更换清华源：`https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/`
+* 显示下载路径`conda config --set show_channel_urls yes`
 
-* [更换清华源](https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/)
-
-修改文件`~/.codnarc`为：
-
-```
-channels:
-  - defaults
-show_channel_urls: true
-channel_alias: https://mirrors.tuna.tsinghua.edu.cn/anaconda
-default_channels:
-  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
-  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free
-  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/r
-  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/pro
-  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/msys2
-custom_channels:
-  conda-forge: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
-  msys2: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
-  bioconda: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
-  menpo: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
-  pytorch: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
-  simpleitk: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
-```
-
-显示下载路径
-`conda config --set show_channel_urls yes`
-
-* 新建环境
-
-新建环境
-`conda create --name ML python=3.7`
-
-好处在于不用更新conda，这个环境出错的话，可以把这个环境全部删除了，而base环境无法删除
+* 新建环境`conda create --name ML python=3.7`
+  * 好处在于不用更新conda，这个环境出错的话，可以把这个环境全部删除了，而base环境无法删除，测试新项目所需要的python包时，最好也是新建环境。
 
 ## 基本操作
 
@@ -182,7 +154,6 @@ conda install tensorflow-gpu==1.14
 
 用pip安装不会安装其他的依赖`pip install opencv-python`，可能还需要执行`apt install libgl1-mesa-glx`
 
-最好用conda安装，会自动安装其他的依赖`conda install opencv`【这个也有个问题，就是安装会把torch转化为cpu版本，待解决】
 
 ## 其他
 
