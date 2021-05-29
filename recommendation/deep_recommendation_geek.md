@@ -160,6 +160,30 @@ Holdout 检验是最基础，最常用的离线评估方法，它将原始的样
 
 ### 评估指标
 
+confusion matrix
+
+![](images/confusion_matrix.png)
+
 #### 低阶评估指标
 
-准确率（accuracy）、精确率（precision）、召回率（recall）
+准确率（accuracy）、精确率（precision）、召回率（recall）、LogLoss、均方根误差（RMSE，Root Mean Square Error）。
+
+#### 高阶评估指标
+
+P-R 曲线、AUC(Area Under Curve)值、ROC （the Receiver Operating Characteristic）曲线、平均精度均值mAP（mAP，mean average precision），AP是平均精度。
+
+ROC 曲线的横坐标是 False Positive Rate（FPR，假阳性率，也叫真阴性率），纵坐标是 True Positive Rate （TPR，真阳性率，即召回率，医学上也叫灵敏度）
+
+$FPR = \frac{FP}{FP+TN} = 1-recall_{negative}$
+
+$TPR = \frac{TP}{TP+FP} = recall_{positive}$
+
+AP的例子如下：假设，推荐系统对某一用户测试集的排序结果是 1, 0, 0, 1, 1, 1。其中，1 代表正样本，0 代表负样本。计算这个序列中每个位置上的 precision@N。计算平均精度 AP 的时候，我们只取正样本处的 precision 进行平均，根据得到的表格 AP =（1/1 + 2/4 + 3/5 + 4/6）/4 = 0.6917。如果推荐系统对测试集中的每个用户都进行样本排序，那么每个用户都会计算出一个 AP 值，再对所有用户的 AP 值进行平均，就得到了 mAP。也就是说，mAP 是对精确度平均的平均。
+
+![](images/precision@N.jpeg)
+
+#### 合理选择评估指标
+
+在对推荐模型的离线评估中，大家默认的权威指标是 ROC 曲线的 AUC。但 AUC 评估的是整体样本的 ROC 曲线，所以我们往往需要补充分析 mAP，或者对 ROC 曲线进行一些改进，我们可以先绘制分用户的 ROC，再进行用户 AUC 的平均等等。
+
+再比如，在评估 CTR 模型效果的时候，我们可以采用准确率来进行初步的衡量，但我们很有可能会发现，不管什么模型，**准确率都在 95% 以上**。仔细查看数据我们会发现，由于现在电商点击率、视频点击率往往都在 1%-10% 之间。也就是说，90% 以上都是负样本，因此准确率这个指标就不能够精确地反应模型的效果了。这时，我们就需要加入精确率和召回率指标进行更精确的衡量，比如我们采用了 Precision@20 和 Recall@20 这两个评估指标，但它终究只衡量了前 20 个结果的精确率和召回率。如果我们要想看到更全面的指标，就要多看看 Precision@50 和 Recall@50，Precision@100 和 Recall@100，甚至逐渐过渡到 P-R 曲线。
