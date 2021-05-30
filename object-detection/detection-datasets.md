@@ -119,5 +119,3 @@ PASCAL 2012竞赛包括六项（相比2007增加两项）：
 ```
 ```
 
-参考：
-* [目标检测数据集PASCAL VOC简介](https://arleyzhang.github.io/articles/1dc20586/)

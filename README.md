@@ -1,95 +1,66 @@
 # Table of contents
 
-包含人工智能（机器学习/深度学习）的基础知识，目的不在于复制粘贴（即将其他的各个地方的资料汇总到这里，形成一个自认为最适合自己的技术备查文档），而是希翼形成自己对于人工智能领域的理解，拓宽知识深度的同时形成对于知识的共性理解。
+一个项目或者一段学习过程结束了，让知识沉淀下来的最好方法就是形成自己的笔记，笔记不是知识点的汇总，而是自己通过这个过程学到了什么，解决了什么问题，有哪些创新点。
 
-## 环境配置
+> 想起当年一个人问我做的一个内容有什么创新，**我直接说，没什么创新，谁都能做！**。其实并不是这样没什么创新，而是自己理解不足，仅满足于`调包调参`，这样最大的坏处在于通过一个项目自己不能进步，做的工作只是搜索知识+调包+完成功能。
 
-- [x] [深度学习基础环境anaconda/pytorch搭建](environment/anaconda.md)
-- [x] [cuda简介和安装](environment/cuda.md)
+一个好的算法工程师需要兼顾工程能力和研究能力。所谓工程能力，我认为包括三点：
+1. 算法能力（对不同算法的理解和引用，了解算法的内部实现原理、以及其应用场景）；
+2. 编程能力（代码规范性、将想法实现为代码的能力）；
+3. 业务理解能力（理解业务需要，以及将来可能的需求，设计项目中的代码组织，设计服务的部署和通信）。
 
-## python基础包
+研究能力我认为包括：
+1. 了解当前技术面临的主要问题
+2. 对新技术的追踪，解决了哪些问题，哪些问题还没有解决
+3. 英文阅读和沟通能力
 
-- [x] [numpy](python-base/numpy.md)
-- [x] [matplotlib](python-base/matplotlib.md)
-- [x] [pandas](python-base/pandas.md)
+## 开发 Development
 
-## 数学基础
+### 基础操作
 
-- [x] [Markov](math/Markov.md)
-- [x] [MonteCarlo](math/MonteCarlo.md)
+* [git](base_tools/git.md)
+* [docker](base_tools/docker.md)
+* [linux install](base_tools/install_linux.md)
+* [html](webpage/html.md)
+* [css](webpage/css.md)
+* [js](webpage/js.md)
+* [flask](webpage/flask.md)
+* [jquery](webpage/jquery.md)
 
-## 并行化技术
+### 并行化技术
 
-- [x] [《GPU高性能编程 CUDA实战》笔记](environment/cuda_by_example.md)
+* [《GPU高性能编程 CUDA实战》笔记](environment/cuda_by_example.md)
 
-## opencv
+### 工具
 
-- [ ] opencv
+* [向量检索工具faiss](image_retrieval/faiss.md)
+* [numpy](python-base/numpy.md)
+* [matplotlib](python-base/matplotlib.md)
+* [pandas](python-base/pandas.md)
 
-## 推荐系统
+### 深度学习工具
 
-- [ ] [项亮《推荐系统实战》笔记](recommendation/xiangliang.md)
+* [深度学习基础环境anaconda/pytorch搭建](environment/anaconda.md)
+* [cuda简介和安装](environment/cuda.md)
+* [pytorch基础](python-base/pytorch-base.md)
 
-
-## 机器学习
-
-- [ ] 西瓜书笔记
-- [ ] 百面机器学习笔记
-
-## 深度学习
-
-- [ ] 花书笔记
-- [ ] 百面深度学习笔记
-
-### 深度学习框架
-
-- [x] [pytorch基础](python-base/pytorch-base.md)
-- [x] [pytorch开发](python-base/pytorch-develop.md)
-- [ ] minigrad
-
-### cv baseline
-
-- [ ] [cv基础数据库](cv_baseline/datasets.md)
-- [ ] [预训练模型和常用库](cv_baseline/pretrained_models.md)
-- [ ] [CNN可视化](visualization/visualization.md)
-
-### 目标检测
-
-- [ ] [目标检测数据集](object-detection/detection-datasets.md)
-- [ ] [目标检测经典论文](object-detection/object-detection-papers.md)
-
-### 人脸
-
-- [ ] 人脸检测
-- [ ] [2d人脸对齐](fr/warp_and_crop_face.md)
-- [ ] [人脸识别经典论文](fr/face_loss.md)
-- [ ] [人脸数据集](fr/face-datasets.md)
-
-### 语义分割
-
-- [ ] [语义分割经典论文](semantic_segmentation/semantic_segmentation.md)
-- [ ] [语义分隔数据集](semantic_segmentation/datasets.md)
-
-### 伪造检测
-
-- [ ] [伪造检测数据集](deepfake/datasets.md)
-- [ ] [GAN](cv_gan/cv_gan.md)
-
-### 图像检索
-
-- [ ] [图像检索经典论文](image_retrieval/image_retrieval.md)
-- [ ] [图像检索数据集](image_retrieval/datasets.md)
-- [ ] [向量检索工具faiss](image_retrieval/faiss.md)
-
-### 无监督学习
-
-- [ ] [无监督学习](unsupervised/unsupervised.md)
-
-### 强化学习
-
-- [ ] [强化学习](reinforcement/reinforcement.md)
-
-## 其他
+### 算法和编程能力
 
 * [how to ask](others/how_to_ask.md)
 * [google python styleguide](others/zh-google-python-styleguide.md)
+
+## 研究 Research
+
+### cv baseline
+
+* [cv基础论文](cv_baseline/cv_baseline.md)
+* [预训练模型和常用库](cv_baseline/pretrained_models.md)
+
+### 人脸
+
+* [2d人脸对齐](fr/warp_and_crop_face.md)
+* [人脸识别经典论文](fr/face_loss.md)
+
+### 伪造检测
+
+* [伪造检测数据集](deepfake/datasets.md)
