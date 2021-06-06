@@ -1,0 +1,20 @@
+<html>
+    <head>
+        <title> JQuery异步请求DEMO </title>
+        <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                $("button").click(function(){
+                    $.get("./src/hello.txt",function(data,status){
+                        alert("数据: " + data + "\n状态: " + status);
+                    });
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <button>发送一个 HTTP GET 请求并获取返回结果</button>
+
+        <p>这里如果本地直接运行html文件，会出现CORS错误，这个错误还没解决！</p>
+    </body>
+</html>
