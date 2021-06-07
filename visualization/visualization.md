@@ -2,10 +2,18 @@
 
 可视化仓库: [utkuozbulak/pytorch-cnn-visualizations](https://github.com/utkuozbulak/pytorch-cnn-visualizations)
 
-| key point | conference | paper | first author | institute |
-| - | - | - | - | - | - |
-| theory | ECCV 2014 | Visualizing and Understanding Convolutional Networks | Matthew D. Zeiler | Dept. of Computer Science, Courant Institute, New York University |
+| conference | paper | first author | institute |
+| - | - | - | - | - |
+| ECCV 2014 | Visualizing and Understanding Convolutional Networks | Matthew D. Zeiler | Dept. of Computer Science, Courant Institute, New York University |
+| ICCV 2017 | Grad-CAM: Visual Explanations from Deep Networks via Gradient-based Localization | Ramprasaath R. Selvaraju | Georgia Institute of Technology, Atlanta, GA, USA |
 
+## Grad-CAM
+
+![](./imgs/grad-cam-fig2.png)
+
+![](./imgs/grad-cam-1.png)
+![](./imgs/grad-cam-2.png)
+![](./imgs/grad-cam-3.png)
 
 ## Vanilla Backpropagation
 
