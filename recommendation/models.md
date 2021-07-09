@@ -75,3 +75,10 @@
     * 是DeepCrossing的改进，特征之间不直接用拼接的方式
     * ![](images/PNN.png)
     * PNN模型对于深度学习结构的创新主要在于乘积层的引入。具体地说， PNN 模型的乘积层由线性操作部分(图 3-12 中乘积层的 z 部分，对各特征向量进行 线性拼接)和乘积操作部分(图 3-12 中乘积层的 p 部分)组成 。 其中，乘积特 征交叉部分又分为内积操作和外积操作，使用内积操作的 PNN 模型被称为 IPNN (Inner Product-based Neural Network)，使用外积操作的 PNN模型被称为 OPNN ( Outer Product-based Neural Network )。
+
+
+## Learning to Rank
+
+
+
+## DNN双塔
