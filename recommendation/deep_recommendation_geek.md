@@ -175,7 +175,7 @@ ROC 曲线的横坐标是 False Positive Rate（FPR，假阳性率，也叫真�
 
 $FPR = \frac{FP}{FP+TN} = 1-recall_{negative}$
 
-$TPR = \frac{TP}{TP+FP} = recall_{positive}$
+$TPR = \frac{TP}{TP+FN} = recall_{positive}$
 
 AP的例子如下：假设，推荐系统对某一用户测试集的排序结果是 1, 0, 0, 1, 1, 1。其中，1 代表正样本，0 代表负样本。计算这个序列中每个位置上的 precision@N。计算平均精度 AP 的时候，我们只取正样本处的 precision 进行平均，根据得到的表格 AP =（1/1 + 2/4 + 3/5 + 4/6）/4 = 0.6917。如果推荐系统对测试集中的每个用户都进行样本排序，那么每个用户都会计算出一个 AP 值，再对所有用户的 AP 值进行平均，就得到了 mAP。也就是说，mAP 是对精确度平均的平均。
 
