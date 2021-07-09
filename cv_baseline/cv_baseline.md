@@ -92,7 +92,6 @@ BN训练过程
 
 * 推理阶段，采用训练阶段的最后一个batch之后的mean和var，推理阶段的mean和var不改变。
 
-BN推荐参考资料[莫烦ptyhon:什么是批标准化](https://mofanpy.com/tutorials/machine-learning/tensorflow/intro-batch-normalization/)
 
 ## GoogLeNet V3
 
@@ -119,7 +118,7 @@ Inception V3版本相比V2版本修改的地方有：
 3. 采用非对称卷积提取17*17特征图
 4. 采用带BN的辅助分类层
 
-标签平滑的公式如下：
+标签平滑的公式如下，其实就是将标签1改成$1-\epsilon$，将标签0改成$\epsilon$，也可以写成如下形式。
 
 ![](./images/Label_smoothing.png)
 
@@ -214,7 +213,7 @@ Inception-ResNet是将residual的思想加入到Inception模块当中，模块�
 
 ![](./images/Inception-Resnet.png)
 
-## ResNetXt
+## ResNeXt
 
 借鉴VGG和resnet使用相同块叠加和inception模型的拆分-变换-合并的思路，设计了一种简明的结构，及其两种等价形式。其中，形式B很像Inception-ResNet网络中的模块，不同的是每个分支都具有相同的拓扑结构；形式C与AlexNet中分组卷积（grouped convolutions）的理念相似，然而AlexNet使用分组卷积是受限于当时的硬件条件
 
@@ -265,9 +264,9 @@ DenseNet的一个重要缺点是**显存占用大**，参考[深度学习中的G
 * 模型的输出
 
 如果是在训练阶段，根据优化函数的不同，模型参数要保存的梯度的量也有区别。
-* 不带动量的SGD，只需要保存梯度即可，占用显存=参数的显存
-* 带动量的SGD，需要保存参数的梯度和梯度的动量（即上一时刻的梯度），占用显存=2*参数的显存
-* Adam优化器，占用显存=2*参数的显存
+* 不带动量的SGD，只需要保存参数和梯度即可，占用显存=2*参数的显存
+* 带动量的SGD，需要保存参数的梯度和梯度的动量（即上一时刻的梯度），占用显存=3*参数的显存
+* Adam优化器，动量的数目是参数的两倍，占用显存=4*参数的显存
 
 在训练阶段，也要保存模型的输出的梯度，输出的梯度不需要计算动量。
 
