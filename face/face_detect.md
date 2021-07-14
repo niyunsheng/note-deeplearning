@@ -4,6 +4,8 @@
 
 pdf:https://kpzhang93.github.io/MTCNN_face_detection_alignment/paper/spl.pdf
 
+展示代码，用开源`facenet_pytorch`实现，[MTCNN code](./codes/mtcnn_face_detect.py)
+
 突出点：
 * multi-task：
   * detection（面部/非面部分类、边界框回归）
@@ -29,6 +31,8 @@ pdf:https://kpzhang93.github.io/MTCNN_face_detection_alignment/paper/spl.pdf
 * 合并的损失
   * $\min \sum_{i=1}^{N} \sum_{j \in\{\text { det }, \text { box,landmark }\}} \alpha_{j} \beta_{i}^{j} L_{i}^{j}$
   * $\alpha$表示三个任务的损失权重分布，$\beta$表示正负样本，P-Net和R-Net中使用$\alpha_{det}=1,\alpha_{box}=0.5,\alpha_{landmark}=0.5$，O-Net中使用$\alpha_{det}=1,\alpha_{box}=0.5,\alpha_{landmark}=1$
+  * 正样本：三个网络均关注三个损失
+  * 负样本：即背景，只计算面部/非面部分类损失，另外两个损失设置为0。
 
 
 训练过程：
@@ -38,35 +42,36 @@ pdf:https://kpzhang93.github.io/MTCNN_face_detection_alignment/paper/spl.pdf
 
 * 三个网络分别训练，每个网络都有自己想要的大小的图片即训练集，Pnet是`12*12*3`， Rnet是`24*24*3`， Onet是`48*48*3`的图片。然后每个网络都是单独训练的，即训练好Pnet后训练Rnet，再训练Onet，前者的训练输出是后者的训练输入。
 
+有四种训练数据输入：
+* Positive face数据：图片左上右下坐标和label的IOU>0.65的图片
+* part face数据：图片左上右下坐标和label的0.65>IOU>0.4的图片
+* negative face 数据：图片左上右下坐标和lable的IOU<0.3的图片
+* landmark face数据：图片带有landmark label的图片
 
-对于正负样本在训练和推理阶段
-正样本：三个网络均关注三个损失
-负样本：即背景，只计算面部/非面部分类损失，另外两个损失设置为0。
+不同的训练数据的用途：
+* 网络做人脸分类的时候，使用postives 和negatives的图片来做，容易使模型收敛
+* 网络做人脸bbox的偏移量回归的时候，使用positives 和parts的数据
+* 网络做人脸landmark 回归的时候，就只使用landmark face数据了
 
-三个网络中，对于三种损失的权重是不一样的，
+boxes和landmard训练数据的label如何生成：
+* boxes的label标记用归一化的值进行，这样可以不受resize的干扰，假设label为：左上（xlu1， ylu2）右下（xrd，yrd2）， 截图图片实际在原图的绝对坐标为（x1， y1）（x2， y2），那么我们左上x1的offset就是定义为：(x1-xlu1)/（x2-x1）是个归一化的数据，同理可以得到左上y1右下x2、右下y2的offset。
+* landmark的label也是用归一化的值进行，是标记坐标相对于真实的box左上角的相对偏移，假设landmark是(x1,y1)，则label是(x1-xlu1)/(xrd-xlu1)
+
+对于R-Net和O-Net的训练：
+* Pnet在前述数据的情况下进行训练并完成训练，我们将所有的WIDER数据和CelebA数据输入到Pnet，会得到很多的候选，去原图截图，计算截图和label的IOU，按照上述四种数据的分类标准分别区分开，同时label标注方法和上述标注方法一致。我们经过Pnet就可以得到Rnet所需的24*24大小的训练数据了。我们继续训练好Rnet。
+* Onet的输入是WIDER数据集和CelebA数据集经过Pnet、Rnet后得到的在原图上截取的图片，根据IOU的不同进行分类，并resize为48*48。这样子我们再把Onet给训练好。
+
+Hard Sample mining技巧：
+* 只对分类损失进行hard sample mining，具体意思是在一个batch里面的图片数据，只取分类损失（det loss）的前70%的训练数据（这个比例是提前设好的）backprop回去。其余两类损失不做这样的hard sample mining，原因在于回归问题再微小的nudge修正都是有用的，但是二分类就未必了。
 
 
-
-开源pyhton库`facenet_pytorch`中测试的fps如下：
-
-
-
-
-
-mtcnn算法只有一个缺点，就是当图像中的人脸数目比较多的时候，mtcnn人脸检测算法的的性能下降的比较快，而retinaFace算法不受人脸数量的限制，这是由于 mtcnn算法使用了图像金字塔算法，需要对图像进行多次缩放，导致前向运算次数比较多，严重拖慢了检测速度，而retinaFace是基于FPN的检测算法，无需进行图像金字塔，仅需要前向运算一次即可，好了说了那么多，下面跟着小编的步伐，从应用的角度比较一下。
-
+MTCNN的缺点：
+* 当图像中的人脸数目比较多的时候，mtcnn人脸检测算法的的性能下降的比较快，而retinaFace算法不受人脸数量的限制，这是由于 mtcnn算法使用了图像金字塔算法，需要对图像进行多次缩放，导致前向运算次数比较多，严重拖慢了检测速度
 
 
 ## RetinaFace
 
-retinaFace，也是目前one-stage 目标检测算法的缺点
-
-1.预设的anchor 是一柄双刃剑，anchor需要事先指定，并且不同的检测任务需要的anchor并不一样
-
-2.anchor的数量会非常的多，由于fpn根据featureMap上的每一个点生成一个anchor,即使我们用nms或者soft-nms去重，但是负样本的数量依然非常非常多，与正样本比例严重失衡，所以诸如RetinaNet等网络的工作都是想办法去采取合适的比例参数平衡这个差异。
-
-3.Anchor数量巨多，需要每一个都进行IOU计算，耗费巨大的算力，降低了效率，步骤十分繁琐，而这些冗余其实是可以消灭的。以上是anchor非常明显的缺点，所以anchor-free模型开始兴起，它的兴起，一方面说明anchor-based固有的缺陷需要改正；另一方面说明现有的anchor-based方法已经有了很高的baseline，不好继续突破。
-
-
-
-原文網址：https://kknews.cc/tech/bzopvnm.html
+retinaFace的缺点，也是目前one-stage目标检测算法的缺点
+* 预设的anchor 是一柄双刃剑，anchor需要事先指定，并且不同的检测任务需要的anchor并不一样
+* anchor的数量会非常的多，由于fpn根据featureMap上的每一个点生成一个anchor,即使我们用nms或者soft-nms去重，但是负样本的数量依然非常非常多，与正样本比例严重失衡，所以诸如RetinaNet等网络的工作都是想办法去采取合适的比例参数平衡这个差异。
+* Anchor数量巨多，需要每一个都进行IOU计算，耗费巨大的算力，降低了效率，步骤十分繁琐，而这些冗余其实是可以消灭的。以上是anchor非常明显的缺点，所以anchor-free模型开始兴起，它的兴起，一方面说明anchor-based固有的缺陷需要改正；另一方面说明现有的anchor-based方法已经有了很高的baseline，不好继续突破。
