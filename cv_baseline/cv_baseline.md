@@ -12,6 +12,7 @@
 | ResNeXt | CVPR 2017 | Aggregated Residual Transformations for Deep Neural Networks | Saining Xie | UC San Diego |
 | DenseNet | CVPR 2017 | Densely Connected Convolutional Networks | Gao Huang/Zhuang Liu | Cornell University/Tsinghua University |
 | SENet | CVPR 2018 | Squeeze-and-Excitation Networks | Jie Hu | Chinese Academy of Sciences |
+| EfficientNet | ICML 2019 | EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks | Mingxing Tan | 1Google Research |
 
 code
 * [AlexNet](./codes/AlexNet.py)
@@ -22,6 +23,7 @@ code
 * [ResNet/ResNeXt](./codes/ResNet.py)
 * [DenseNet](./codes/DenseNet.py)
 * [SENet](./codes/se_resnet.py)
+* [EfficientNet](./codes/EfficientNet.py)
 
 ## AlexNet
 
@@ -90,7 +92,6 @@ BN训练过程
 
 * 推理阶段，采用训练阶段的最后一个batch之后的mean和var，推理阶段的mean和var不改变。
 
-BN推荐参考资料[莫烦ptyhon:什么是批标准化](https://mofanpy.com/tutorials/machine-learning/tensorflow/intro-batch-normalization/)
 
 ## GoogLeNet V3
 
@@ -117,7 +118,7 @@ Inception V3版本相比V2版本修改的地方有：
 3. 采用非对称卷积提取17*17特征图
 4. 采用带BN的辅助分类层
 
-标签平滑的公式如下：
+标签平滑的公式如下，其实就是将标签1改成$1-\epsilon$，将标签0改成$\epsilon$，也可以写成如下形式。
 
 ![](./images/Label_smoothing.png)
 
@@ -212,7 +213,7 @@ Inception-ResNet是将residual的思想加入到Inception模块当中，模块�
 
 ![](./images/Inception-Resnet.png)
 
-## ResNetXt
+## ResNeXt
 
 借鉴VGG和resnet使用相同块叠加和inception模型的拆分-变换-合并的思路，设计了一种简明的结构，及其两种等价形式。其中，形式B很像Inception-ResNet网络中的模块，不同的是每个分支都具有相同的拓扑结构；形式C与AlexNet中分组卷积（grouped convolutions）的理念相似，然而AlexNet使用分组卷积是受限于当时的硬件条件
 
@@ -263,9 +264,9 @@ DenseNet的一个重要缺点是**显存占用大**，参考[深度学习中的G
 * 模型的输出
 
 如果是在训练阶段，根据优化函数的不同，模型参数要保存的梯度的量也有区别。
-* 不带动量的SGD，只需要保存梯度即可，占用显存=参数的显存
-* 带动量的SGD，需要保存参数的梯度和梯度的动量（即上一时刻的梯度），占用显存=2*参数的显存
-* Adam优化器，占用显存=2*参数的显存
+* 不带动量的SGD，只需要保存参数和梯度即可，占用显存=2*参数的显存
+* 带动量的SGD，需要保存参数的梯度和梯度的动量（即上一时刻的梯度），占用显存=3*参数的显存
+* Adam优化器，动量的数目是参数的两倍，占用显存=4*参数的显存
 
 在训练阶段，也要保存模型的输出的梯度，输出的梯度不需要计算动量。
 
@@ -301,3 +302,45 @@ SE block的结构如下，包括squeeze操作、excitation操作和一个scale�
 ![](./images/SE-block-role.png)
 
 输出值越动荡，说明SE对channel具有选择作用，从图中可以看出：前三个stage的方差较大，最后一个stage的后两个block的方差较小，因此可以不加SE block，以节省参数。
+
+## EfficientNet
+
+我们系统地研究了模型缩放并且仔细验证了**网络深度、宽度和分辨率**之间的平衡可以导致更好的性能表现。使用神经架构搜索设计了一个baseline网络，并且将模型放大获得一系列模型，我们称之为EfficientNets，它的精度和效率比之前所有的卷积网络都好。EfficientNet-B7在ImageNet上获得了最先进的 84.4%的top-1精度 和 97.1%的top-5精度。
+
+![](./images/efficientnet_fig2.png)
+
+* 深度：即层数，更深的网络由于梯度消失问题
+* 宽度：指channel的数目，更宽的网络可以捕捉到更细粒度的特征从而易于训练。
+* 分辨率：即每个channel的长宽
+
+第一个问题：是否存在一个原则性的放大CNN的方法实现更好的精度和效率？如图二所示，提出了一个简单高效的**复合缩放方法**，不像传统实践中任意缩放这些因子，我们的方法使用一组固定的缩放系数统一缩放网络深度、宽度和分辨率。举个例子，如果想使用$2^N$倍的计算资源，我们可以简单的对网络深度扩大$\alpha^N$倍、宽度扩大$\beta^N$ 、图像尺寸扩大$\gamma^N$ 倍，这里的 $\alpha  \beta  \gamma$ 都是由原来的小模型上做微小的网格搜索决定的常量系数。这里采用这样的方法来缩放是为了降低模型复杂度。
+
+第二个问题：模型缩放的高效性严重地依赖于baseline网络。我们使用网络结构搜索发展了一种新的baseline网络，然后将它缩放来获得一系列模型，称之为EfficientNets。
+
+![](images/efficientnet_tab1.png)
+
+torchvision中没有该模型，可以在timm中调用`from timm.models.efficientnet import tf_efficientnet_b4_ns, tf_efficientnet_b3_ns, tf_efficientnet_b5_ns, tf_efficientnet_b2_ns, tf_efficientnet_b6_ns, tf_efficientnet_b7_ns`
+
+不同模型之间的区别
+
+```python
+EfficientNet params
+    name: (channel_multiplier, depth_multiplier, resolution, dropout_rate)
+    'efficientnet-b0': (1.0, 1.0, 224, 0.2),
+    'efficientnet-b1': (1.0, 1.1, 240, 0.2),
+    'efficientnet-b2': (1.1, 1.2, 260, 0.3),
+    'efficientnet-b3': (1.2, 1.4, 300, 0.3),
+    'efficientnet-b4': (1.4, 1.8, 380, 0.4),
+    'efficientnet-b5': (1.6, 2.2, 456, 0.4),
+    'efficientnet-b6': (1.8, 2.6, 528, 0.5),
+    'efficientnet-b7': (2.0, 3.1, 600, 0.5),
+    'efficientnet-b8': (2.2, 3.6, 672, 0.5),
+    'efficientnet-l2': (4.3, 5.3, 800, 0.5),
+    Args:
+      channel_multiplier: multiplier to number of channels per layer
+      depth_multiplier: multiplier to number of repeats per stage
+```
+
+其中，MBConvBlock指的是MobileNetV2中用的`Mobile Inverted Residual Bottleneck Block`，其结构和ResNet基本结构很相似。不过ResNet是先降维（0.25倍）、提特征、再升维。而MobileNetV2 则是先升维（6倍）、提特征、再降维。
+
+![](./images/MBConvBlock.png)
