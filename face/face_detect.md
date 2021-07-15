@@ -68,8 +68,38 @@ Hard Sample mining技巧：
 MTCNN的缺点：
 * 当图像中的人脸数目比较多的时候，mtcnn人脸检测算法的的性能下降的比较快，而retinaFace算法不受人脸数量的限制，这是由于 mtcnn算法使用了图像金字塔算法，需要对图像进行多次缩放，导致前向运算次数比较多，严重拖慢了检测速度
 
+评估指标：
+* 人脸检测的主要评估指标为AP
 
 ## RetinaFace
+
+pdf:https://openaccess.thecvf.com/content_CVPR_2020/papers/Deng_RetinaFace_Single-Shot_Multi-Level_Face_Localisation_in_the_Wild_CVPR_2020_paper.pdf
+
+![](./images/retinaface-arc.png)
+
+主要贡献：
+* 基于单级设计，提出一个新的像素级人脸定位方法RetinaFace，利用多任务学习策略同时预测人脸评分，人脸框，5个关键点以及对应于每个人脸像素的3D位置
+* 在WIDER FACE难子集上，RetinaFace的AP=91.4%,比最好的两级级联方法ISRN提升1.1%
+* 在IJB-C测试集上，RetinaFace将ArcFace在人脸认证（face verification）上进一步提升（TAR=89.59%FAR=1e-6）。这表示更好的人脸定位可以显著提升人脸识别
+* 通过利用轻量级的骨架网络，RetinaFace可以在单一CPU上对一张VGA分辨率的图像实时运行
+* 我们手工标注了WIDER FACE数据集上的五点，在外监督信号的辅助下获得了难人脸检测的显著提升
+
+单阶段和双阶段特点对比：
+* 两阶方法如Faster RCNN和单阶方法如SSD和RetinaNet。
+* 两阶方法应用一个“proposal and refinement”机制提取高精度定位。而单阶方法密集采样人脸位置和尺度，导致训练过程中极度不平衡的正样本和负样本。
+* 为了处理这种不平衡，采样和re-weighting方法被广泛使用。
+* 相比两阶方法，单阶方法更高效并且有更高的召回率，但是有获取更高误报率的风险，影响定位精度。
+
+训练的损失函数
+* $\begin{aligned} \mathcal{L} &=\mathcal{L}_{c l s}\left(p_{i}, p_{i}^{*}\right)+\lambda_{1} p_{i}^{*} \mathcal{L}_{b o x}\left(t_{i}, t_{i}^{*}\right) +\lambda_{2} p_{i}^{*} \mathcal{L}_{p t s}\left(l_{i}, l_{i}^{*}\right)+\lambda_{3} p_{i}^{*} \mathcal{L}_{m e s h}\left(v_{i}, v_{i}^{*}\right) \end{aligned}$
+* 人脸分类损失`L_cls`
+* 人脸框回归损失`L_box`，R表示smooth_L1鲁棒性回归函数
+* 人脸关键点回归函数`L_pts`
+* 密集回归损失`L_pixel`，投影到图像平面的3D点
+* 三个超参数分别设置为0.25、0.1、0.01
+
+
+通过联合外监督（extra-supervised）和自监督（self-supervised）的多任务学习，RetinaFace对各种尺度条件下的人脸可以做到像素级别的定位
 
 retinaFace的缺点，也是目前one-stage目标检测算法的缺点
 * 预设的anchor 是一柄双刃剑，anchor需要事先指定，并且不同的检测任务需要的anchor并不一样
